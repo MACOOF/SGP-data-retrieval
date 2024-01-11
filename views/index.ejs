@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/main.css" />
+  <title>Document</title>
+</head>
+<body>
+  <div>
+  <form  action="/add" method="post" id="myForm">
+    <input type="text" id="query" name="query" placeholder="Enter the query" autocomplete="off" autofocus="true" required>
+    <button class="add" type="submit" name="list" id="query_Submit">Submit</button>
+  </form>
+  </div>
+  <div class="center" id="table-id" ><!--hidden class-->
+  <table>
+    <%let i=0;%>
+    <%for(let object of answer){%>
+      <%if(i==0){i=1;%>
+      <tr>
+        <%for(let key in object){%>
+        <th><%=key%></th>
+        <%}%>
+      </tr>
+      <%}%>
+      <tr>
+        <%for(let key in object){%>
+        <td><%=object[key]%></td>
+        <%}%>
+      </tr>
+    <%}%>
+  </table>
+  </div>
+  <div class=" center" id="download"><!--hidden class-->
+    <form action="/download" method="post">
+      <button type="submit" id="downloadBtn">Download</button>
+   </form>
+  </div>
+   <!-- <script>
+    document.getElementById('myForm').addEventListener('submit', async function(event) {
+      event.preventDefault(); // Prevent default form submission behavior
+      
+      const inputValue = document.getElementById('query').value;
+
+      if (inputValue.trim() !== '') {
+          try {
+              // Submit form data to backend using fetch API or another method
+              const response = await fetch('/add', {
+                  method: 'POST',
+                  // headers: {
+                  //     'Content-Type': 'application/x-www-form-urlencoded',
+                  // },
+                  body: `inputText=${inputValue}`
+              });
+              // Log server response
+
+              // Show the hidden divs
+              document.getElementById('table-id').classList.remove('hidden');
+               document.getElementById('download').classList.remove('hidden');
+
+              // Clear the input field
+              //document.getElementById('query').value = '';
+              
+          } catch (error) {
+              console.error('Error submitting form:', error);
+          }
+      } else {
+          alert('Please enter something in the input field.');
+      }
+  });
+
+  </script> -->
+</body>
+</html>
